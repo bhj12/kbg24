@@ -1,7 +1,6 @@
 package com.bhjbestkalyangame.realapplication;
 
-
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -121,7 +120,10 @@ public class PurchaseActivity extends AppCompatActivity implements PurchasesUpda
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
             for (Purchase purchase : purchases) {
                 Toast.makeText(this, "Purchase successful: " + purchase.getProducts(), Toast.LENGTH_SHORT).show();
-                // Handle post-purchase logic here
+                // Start SubActivity upon successful purchase
+                Intent intent = new Intent(PurchaseActivity.this, SubActivity.class);
+                startActivity(intent);
+                finish(); // Optional: Finish this activity if you want to close it
             }
         } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
             Toast.makeText(this, "Purchase canceled", Toast.LENGTH_SHORT).show();
