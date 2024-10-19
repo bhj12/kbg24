@@ -11,10 +11,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ResultActivity extends AppCompatActivity {
-    private static final String TAG = "ResultActivity"; // Tag for logging
-    private TextView resultTextView;
+    private static final String TAG = "ResultActivity";
     private TextView gameTitleTextView;
     private TextView dataBaseStatusTextView;
+    private TextView[] resultTextViews = new TextView[4]; // Array for 4 TextViews
     private DatabaseReference databaseReference;
 
     @Override
@@ -23,49 +23,46 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.result_layout);
 
         // Initialize TextViews
-        resultTextView = findViewById(R.id.resultTextView);
         gameTitleTextView = findViewById(R.id.gameTitleTextView);
         dataBaseStatusTextView = findViewById(R.id.dataBaseStatus);
+        resultTextViews[0] = findViewById(R.id.resultTextView1);
+        resultTextViews[1] = findViewById(R.id.resultTextView2);
+        resultTextViews[2] = findViewById(R.id.resultTextView3);
+        resultTextViews[3] = findViewById(R.id.resultTextView4);
 
         // Get the game type passed from the previous activity
         String gameType = getIntent().getStringExtra("gameType");
-
-        // Update the title TextView with the game type
         gameTitleTextView.setText(gameType != null ? gameType : "Game Type Not Specified");
 
         // Initialize Firebase database reference
         databaseReference = FirebaseDatabase.getInstance().getReference(gameType);
-
-        // Fetch data from Firebase
-        fetchGameData(gameType);
+        fetchGameData();
     }
 
-    private void fetchGameData(String gameType) {
+    private void fetchGameData() {
         dataBaseStatusTextView.setText("Connecting to Firebase...");
 
-        // Listen for data changes in the specified node
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataBaseStatusTextView.setText("Fetching data...");
-                StringBuilder resultBuilder = new StringBuilder();
+                int index = 0;
 
-                // Iterate through the data snapshot and append data to the result
-                int index = 1;
+                // Clear previous data
+                for (TextView resultTextView : resultTextViews) {
+                    resultTextView.setText("");
+                }
+
+                // Iterate through the data snapshot and append data to the result TextViews
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Object value = data.getValue(); // Get value as Object
-                    if (value instanceof String) {
-                        resultBuilder.append("Super No ").append(index).append(": ").append(value).append("\n");
-                    } else if (value instanceof Long) {
-                        resultBuilder.append("Super No ").append(index).append(": ").append(String.valueOf(value)).append("\n");
-                    } else {
-                        resultBuilder.append("Super No ").append(index).append(": Unknown type\n");
-                    }
+                    if (index >= resultTextViews.length) break; // Limit to 4 results
+
+                    Object value = data.getValue();
+                    String resultText = "Super No " + (index + 1) + ": " + (value instanceof String ? value : String.valueOf(value));
+                    resultTextViews[index].setText(resultText);
                     index++;
                 }
 
-                // Display the fetched data in the resultTextView
-                resultTextView.setText(resultBuilder.toString());
                 dataBaseStatusTextView.setText("Data fetched successfully.");
             }
 
