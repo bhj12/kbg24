@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+<TextView
+android:id="@+id/textView"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Kalyan Best Game"
+android:textSize="24sp"
+android:textColor="#000000"
+android:background="#C5FAAF07"
+android:padding="16dp"
+android:gravity="center"
+android:layout_marginBottom="16dp" />
+
+    <ImageView
+        android:id="@+id/sampleImageView"
+        android:layout_width="411dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="Sample Image"
+        android:scaleType="centerInside"
+        android:src="@drawable/back_image" />
+
+    <Button
+android:id="@+id/button1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Kalyan Matka"
+android:background="#800000"
+android:textColor="#FFFFFF"
+android:layout_marginBottom="16dp"
+    android:layout_marginTop="90dp"
+android:backgroundTint="@null" />
+
+<Button
+android:id="@+id/button2"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Kalyan Night"
+android:background="#800000"
+android:textColor="#FFFFFF"
+android:layout_marginBottom="16dp"
+android:layout_marginTop="25dp"
+    android:backgroundTint="@null" />
+
+<Button
+android:id="@+id/button3"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="On day game"
+android:background="#800000"
+android:textColor="#FFFFFF"
+    android:layout_marginTop="25dp"
+android:layout_marginBottom="16dp"
+android:backgroundTint="@null" />
+
+<Button
+android:id="@+id/button4"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Vip Membership"
+android:background="#800000"
+android:textColor="#FFFFFF"
+    android:layout_marginTop="25dp"
+android:backgroundTint="@null" />
+    </LinearLayout>

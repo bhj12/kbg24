@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "199410047736",
+    "firebase_url": "https://kalyan-best-game-default-rtdb.firebaseio.com",
+    "project_id": "kalyan-best-game",
+    "storage_bucket": "kalyan-best-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199410047736:android:32f0154ad6ac7278c3390d",
+        "android_client_info": {
+          "package_name": "com.bhjbestkalyangame.realapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199410047736-0ip54gkgd8ti5i1pactipba7u4kgmtj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt4HSYZ2xHP8BnZrANgu-7V2BOEWH07LE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199410047736-0ip54gkgd8ti5i1pactipba7u4kgmtj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
