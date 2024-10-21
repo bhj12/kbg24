@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,64 +10,24 @@
         android:id="@+id/gameTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Game Type"
         android:textSize="24sp"
+        android:background="#FFC107"
         android:layout_gravity="center"
-        android:padding="8dp" />
+        android:layout_marginBottom="16dp"/>
 
     <TextView
         android:id="@+id/dataBaseStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DataBase Status"
-        android:textSize="24sp"
+        android:textSize="40sp"
+        android:autoSizeMaxTextSize="@dimen/cardview_compat_inset_shadow"
         android:layout_gravity="center"
-        android:padding="8dp" />
+        android:layout_marginBottom="16dp"/>
 
-    <LinearLayout
-        android:id="@+id/resultsContainer"
+    <GridLayout
+        android:id="@+id/resultsGridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
-
-        <TextView
-            android:id="@+id/resultTextView1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:padding="8dp" />
-
-        <TextView
-            android:id="@+id/resultTextView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:padding="8dp" />
-
-        <TextView
-            android:id="@+id/resultTextView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/circle_background"
-            android:padding="8dp" />
-
-        <TextView
-            android:id="@+id/resultTextView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:padding="8dp" />
-    </LinearLayout>
-
+        android:columnCount="3"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

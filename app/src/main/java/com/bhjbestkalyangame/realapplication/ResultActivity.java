@@ -1,7 +1,12 @@
 package com.bhjbestkalyangame.realapplication;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -14,7 +19,7 @@ public class ResultActivity extends AppCompatActivity {
     private static final String TAG = "ResultActivity";
     private TextView gameTitleTextView;
     private TextView dataBaseStatusTextView;
-    private TextView[] resultTextViews = new TextView[4]; // Array for 4 TextViews
+    private GridLayout resultsGridLayout; // GridLayout to hold results
     private DatabaseReference databaseReference;
 
     @Override
@@ -25,10 +30,7 @@ public class ResultActivity extends AppCompatActivity {
         // Initialize TextViews
         gameTitleTextView = findViewById(R.id.gameTitleTextView);
         dataBaseStatusTextView = findViewById(R.id.dataBaseStatus);
-        resultTextViews[0] = findViewById(R.id.resultTextView1);
-        resultTextViews[1] = findViewById(R.id.resultTextView2);
-        resultTextViews[2] = findViewById(R.id.resultTextView3);
-        resultTextViews[3] = findViewById(R.id.resultTextView4);
+        resultsGridLayout = findViewById(R.id.resultsGridLayout);
 
         // Get the game type passed from the previous activity
         String gameType = getIntent().getStringExtra("gameType");
@@ -40,30 +42,65 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void fetchGameData() {
-        dataBaseStatusTextView.setText("Connecting to Firebase...");
+        dataBaseStatusTextView.setText("loading...");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                dataBaseStatusTextView.setText("Fetching data...");
+                dataBaseStatusTextView.setText("loading...");
+
+                // Clear previous views
+                resultsGridLayout.removeAllViews();
+
                 int index = 0;
 
-                // Clear previous data
-                for (TextView resultTextView : resultTextViews) {
-                    resultTextView.setText("");
-                }
-
-                // Iterate through the data snapshot and append data to the result TextViews
+                // Iterate through the data snapshot and create TextViews
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    if (index >= resultTextViews.length) break; // Limit to 4 results
-
                     Object value = data.getValue();
-                    String resultText = "Super No " + (index + 1) + ": " + (value instanceof String ? value : String.valueOf(value));
-                    resultTextViews[index].setText(resultText);
+                    String dataValue = value instanceof String ? (String) value : String.valueOf(value);
+
+                    // Create a vertical LinearLayout to hold both label and data
+                    LinearLayout resultLayout = new LinearLayout(ResultActivity.this);
+                    resultLayout.setOrientation(LinearLayout.VERTICAL);
+                    resultLayout.setPadding(8, 8, 8, 8);
+                    resultLayout.setGravity(Gravity.CENTER); // Center content
+                    resultLayout.setBackgroundResource(R.drawable.border_background); // Set background
+
+                    // Create the "Super No" TextView
+                    TextView superNoTextView = new TextView(ResultActivity.this);
+                    superNoTextView.setText(String.format("Super No %d:", index + 1));
+                    superNoTextView.setTextSize(16);
+                    superNoTextView.setTypeface(null, Typeface.BOLD); // Set text to bold
+                    superNoTextView.setPadding(0, 0, 0, 4); // Padding for spacing
+                    superNoTextView.setGravity(Gravity.CENTER); // Center the label
+                    superNoTextView.setTextColor(Color.parseColor("#BE7273")); // Gold color
+
+                    // Create the data TextView
+                    TextView dataTextView = new TextView(ResultActivity.this);
+                    dataTextView.setText(dataValue);
+                    dataTextView.setTextSize(35); // Size 20 for data
+                    dataTextView.setTypeface(null, Typeface.BOLD); // Set text to bold
+                    dataTextView.setGravity(Gravity.CENTER); // Center the data text
+                    dataTextView.setTextColor(Color.parseColor("#5C0002"));
+                    //dataTextView.setTextColor(Color.YELLOW); // Yellow color
+
+                    // Add both TextViews to the LinearLayout
+                    resultLayout.addView(superNoTextView);
+                    resultLayout.addView(dataTextView);
+
+                    // Set layout parameters for the result layout
+                    GridLayout.LayoutParams params = new GridLayout.LayoutParams(
+                            GridLayout.spec(index / 3),
+                            GridLayout.spec(index % 3));
+                    resultLayout.setLayoutParams(params);
+
+                    // Add the result layout to the GridLayout
+                    resultsGridLayout.addView(resultLayout);
                     index++;
                 }
+                dataBaseStatusTextView.setTextSize(10);
+                dataBaseStatusTextView.setText("");
 
-                dataBaseStatusTextView.setText("Data fetched successfully.");
             }
 
             @Override
