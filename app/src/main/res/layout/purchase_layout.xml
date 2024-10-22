@@ -17,13 +17,20 @@
         android:gravity="center"
     android:layout_marginBottom="20dp" />
 
+    <ImageView
+        android:layout_width="366dp"
+        android:layout_height="304dp"
+        android:src="@drawable/purchasekbg">
+
+    </ImageView>
 
 
     <Button
         android:id="@+id/buyButton"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="430dp"
-        android:textSize="35sp"
-        android:text="Buy" />
+        android:gravity="center"
+        android:layout_marginTop="35dp"
+        android:text="Buy"
+        android:textSize="35sp" />
 </LinearLayout>
