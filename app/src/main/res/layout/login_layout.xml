@@ -9,13 +9,18 @@
         android:id="@+id/loginStatusTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
+
     android:background="#C5FAAF07"
     android:gravity="center"
     android:padding="16dp"
     android:text="Login Status"
     android:textColor="#000000"
     android:textSize="24sp" />
+
+    <ImageView
+        android:layout_width="366dp"
+        android:layout_height="471dp"
+        android:src="@drawable/disclaimer"></ImageView>
 
     <Button
         android:id="@+id/loginButton"
