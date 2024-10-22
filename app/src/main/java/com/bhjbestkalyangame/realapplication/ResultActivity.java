@@ -68,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
 
                     // Create the "Super No" TextView
                     TextView superNoTextView = new TextView(ResultActivity.this);
-                    superNoTextView.setText(String.format("Super No %d:", index + 1));
+                    superNoTextView.setText(String.format("Super No %d", index + 1));
                     superNoTextView.setTextSize(16);
                     superNoTextView.setTypeface(null, Typeface.BOLD); // Set text to bold
                     superNoTextView.setPadding(0, 0, 0, 4); // Padding for spacing
@@ -92,6 +92,7 @@ public class ResultActivity extends AppCompatActivity {
                     GridLayout.LayoutParams params = new GridLayout.LayoutParams(
                             GridLayout.spec(index / 3),
                             GridLayout.spec(index % 3));
+                    params.setMargins(16, 16, 16, 16);
                     resultLayout.setLayoutParams(params);
 
                     // Add the result layout to the GridLayout
