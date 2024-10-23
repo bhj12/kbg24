@@ -12,7 +12,7 @@ android {
         applicationId "com.bhjbestkalyangame.realapplication"
         minSdk 21
         targetSdk 34
-        versionCode 27
+        versionCode 28
         versionName "3.1."
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
